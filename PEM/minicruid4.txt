@@ -1,0 +1,100 @@
+
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+#include <locale.h>
+#include <stdlib.h>
+
+struct ficha{
+	char nome[40];
+	char telefone[20];
+	char endereco[40];
+	char email[20];
+	int idade;	
+};
+int buscaRecursiva(char busca[], struct ficha vetor[], int indiceInicio, int N)
+{	if(indiceInicio >= N) return -1; 
+	if(vetor[indiceInicio].ativo && strcmp(busca, vetor[indiceInicio].nome) == 0)
+			return indiceInicio;
+	return buscaRecursiva(busca, vetor, indiceInicio+1, N);
+}
+
+int main()
+{
+	struct ficha agenda[100];
+	int fichas_existentes = 0, proxima = 0;
+	char opcao[10]="0";
+        setlocale(LC_ALL, "Portuguese");
+
+	while(opcao[0] != '5')
+	{
+
+		printf("\nEntre com a opção desejada:\n");
+		printf("\n1) Inserir ficha:");
+		printf("\n2) Procurar por nome:");
+		printf("\n3) Listar toda a base:");
+		printf("\n4) Excluir por nome:");
+		printf("\n5) Sair\n\n");
+		gets(opcao);
+
+		if(opcao[0] == '1') //inserir
+		{
+			printf("\nEntre com um nome:");
+			gets(agenda[proxima].nome);
+			printf("\nEntre com um telefone:");
+			gets(agenda[proxima].telefone);
+			printf("\nEntre com um endereço:");
+			gets(agenda[proxima].endereco);
+			printf("\nEntre com um e-mail:");
+			gets(agenda[proxima].email);
+			printf("\nEntre com uma idade:");
+			char aux[5];
+			gets(aux);
+			fichas_existentes++;
+			proxima++;
+		}
+		if(opcao[0] == '2') //procurar
+		{
+			char procurado[40];
+			printf("\nEntre com o nome procurado:");
+			gets(procurado);
+
+		int resp = procurar(procurado, agenda, fichas_existentes);
+			if(resp != -1)
+				printf("%s, telefone: %s, endereço: %s, e-mail: %s, idade: %d\n",
+			      agenda[resp].nome, agenda[resp].telefone, agenda[resp].endereco,
+				  agenda[resp].email, agenda[resp].idade);
+			else
+				printf("\n\nNome não encontrado\n");
+		}
+		if(opcao[0] == '3') //listar tudo
+		{
+			printf("\n\n");
+			bool existe_ativos=false;
+			int i;
+			for(i=0; i<fichas_existentes; i++)
+			{	if(agenda[i].ativo)
+			    {	printf("%s, telefone: %s, endereço: %s, e-mail: %s, idade: %d\n",
+			    		agenda[i].nome, agenda[i].telefone, agenda[i].endereco,
+						agenda[i].email, agenda[i].idade);
+					existe_ativos=true;
+				}
+			}
+			if(!existe_ativos)
+				printf("está vazia!\n");
+		}
+		if(opcao[0] == '4') //excluir
+		{	Char procurado[40];
+			printf("\n Qual será excluído:");
+			gets(procurado);
+			
+			int resp = buscaRecursiva(busca, agenda, 0, fichas_existentes);
+			if(resp != -1)
+			{	printf("\n\nA ficha de %s será removida\n", agenda[resp].nome);
+			    agenda[resp].ativo = false;
+			}
+			else printf("\n\nNome não encontrado\n");
+		}
+	}
+	return 0;
+}

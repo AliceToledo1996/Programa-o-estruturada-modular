@@ -1,0 +1,20 @@
+void borda(int**original, int Linhas, int Colunas, int maxValor, int tamborda)
+
+{	int l,c;
+
+	for(l=0; l<linhas; l++)
+	
+	{	for(c=0; c<Colunas; c++)
+	
+		{	if(l<tamBorda || c<tamBorda || l>=tamBorda || c>= tamBorda)
+		
+			{	
+			
+			original[l][c] = 0;	
+			
+			}
+					
+		}
+	}
+	
+}

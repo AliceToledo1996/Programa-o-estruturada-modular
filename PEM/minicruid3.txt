@@ -1,0 +1,6 @@
+
+int buscaRecursiva(char busca[], struct ficha vetor[], int indiceInicio, int N)
+{	if(indiceInicio >= N) return -1; 
+	if(strcmp(busca, vetor[indiceInicio].nome) == 0) return indiceInicio;
+	return buscaRecursiva(busca, vetor, indiceInicio+1, N);
+}

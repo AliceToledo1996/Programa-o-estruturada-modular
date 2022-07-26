@@ -1,0 +1,22 @@
+void diminuirBrilho(int** original, int linhas, int colunas, int minValor)
+
+{
+	int l, c;
+
+	for(l=0; l<linhas; l++)
+	
+	{
+		for(c=0; c<colunas; c++)
+		
+		{
+			original[l][c] = (int)(original[l][c] * 1.2);
+			
+			if(original[l][c] <= minValor)
+			
+				original[l][c] = minValor;
+				
+		}
+		
+	}
+	
+}

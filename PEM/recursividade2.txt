@@ -1,0 +1,11 @@
+-- Crie uma função recursiva que calcule divisões através de subtrações sucessivas:
+int div(int x, int y)
+
+{	if(x < y) return 0;
+
+	else return 1 + div(x-y, y);
+}
+
+
+
+
